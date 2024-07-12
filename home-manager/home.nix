@@ -12,6 +12,7 @@
     ./modules/alacritty.nix
     ./modules/bspwm.nix
     ./modules/git.nix
+    ./modules/nvim.nix
     ./modules/packages.nix
     ./modules/sxhkd.nix
     ./modules/zsh.nix
@@ -31,27 +32,6 @@
     icons = true;
   };
 
-  # Neovim config
-  programs.neovim = with pkgs.vimPlugins; {
-    enable = true;
-
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
-
-    extraLuaConfig = ''
-      -- Write lua code here
-
-      -- or inter polate files like this:
-      ${builtins.readFile ./nvim/options.lua}
-    '';
-
-    plugins = [
-      
-    ];
-  };
-
-
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
@@ -69,7 +49,7 @@
 
   home.sessionVariables = {
     EDITOR = "nvim";
-    WALLPAPER_PATH = "$HOME/.config/home-manager/wallpapers/gruvbox/square.png";
+    WALLPAPER_PATH = "$HOME/.config/home-manager/wallpapers/gruvbox/brown_city.jpg";
   };
 
   # Let Home Manager install and manage itself.

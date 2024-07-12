@@ -10,6 +10,9 @@
       ./hardware-configuration.nix
     ];
 
+  # Kernel
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -42,7 +45,12 @@
   # Graphics
   boot.initrd.kernelModules = [ "amdgpu" ];
   services.xserver.videoDrivers = [ "amdgpu" ];
+  hardware.opengl.enable = true;
+  hardware.opengl.driSupport = true;
   hardware.amdgpu.amdvlk.enable = true;
+
+
+
 
   # Bluetooth
   hardware.bluetooth.enable = true;
@@ -68,12 +76,16 @@
 
   # OBS
   boot.extraModulePackages = with config.boot.kernelPackages; [
+    # Webcam loopback
     v4l2loopback
   ];
   boot.extraModprobeConfig = ''
     options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
   '';
   security.polkit.enable = true;
+  boot.kernelModules = [
+    "v4l2loopback"
+  ];
 
   # Shell
   programs.zsh.enable = true;
@@ -96,7 +108,10 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-
+    # Webcam
+    v4l-utils
+    android-tools
+    adb-sync
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

@@ -16,11 +16,11 @@
         borderless_monocle = true;
         gapless_monocle = true;
 	
-        normal_border_color = "#504945";
-        focused_border_color = "#bdae93";
+        normal_border_color = "#1e1e2e";
+        focused_border_color = "#f38ba8";
       };
       extraConfig = ''
-	feh --bg-fill $WALLPAPER_PATH
+	      feh --bg-fill $HOME/.config/home-manager/wallpapers/rose-pine/interlocking.png
       '';
     };
   };

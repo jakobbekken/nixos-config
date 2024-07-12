@@ -14,6 +14,7 @@
     neofetch
     ripgrep
     eza
+    lm_sensors
 
     # Developer tools
     git
