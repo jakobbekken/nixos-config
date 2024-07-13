@@ -1,7 +1,6 @@
-{ config, pkgs, lib, ... }:
+{ config,  ... }:
 
 {
-  # Define your Home Manager configuration here
   programs.alacritty = {
     enable = true;
     settings = {

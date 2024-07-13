@@ -20,7 +20,7 @@
         focused_border_color = "#f38ba8";
       };
       extraConfig = ''
-	      feh --bg-fill $HOME/.config/home-manager/wallpapers/rose-pine/interlocking.png
+	      feh --bg-fill $HOME/Pictures/wallpapers/catppuccin/shaded_landscape.jpg
       '';
     };
   };

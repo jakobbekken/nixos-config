@@ -17,23 +17,28 @@
 
     extraLuaConfig = ''
       -- Write lua code here
-      ${builtins.readFile ../nvim/keybinds.lua}
-      ${builtins.readFile ../nvim/options.lua}
+      ${builtins.readFile ./keybinds.lua}
+      ${builtins.readFile ./options.lua}
     '';
 
     plugins = with pkgs.vimPlugins; [
       {
         plugin = catppuccin-nvim;
-	config = "colorscheme catppuccin-mocha";
+	      config = "colorscheme catppuccin-mocha";
       }
 
       {
         plugin = lualine-nvim;
-	config = toLua "require('lualine').setup()";
+	      config = toLua "require('lualine').setup()";
       }
       
       {
         plugin = nvim-web-devicons;
+      }
+
+      {
+        plugin = telescope-nvim;
+        config = toLuaFile ./plugins/telescope.lua;
       }
 
       # {

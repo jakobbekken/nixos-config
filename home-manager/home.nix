@@ -5,32 +5,18 @@
   home.username = "jokko";
   home.homeDirectory = "/home/jokko";
   home.stateVersion = "24.05"; # Do not change
+  home.keyboard.options = [ "caps:escape" ];
 
   nixpkgs.config.allowUnfree = true;
 
   imports = [
-    ./modules/alacritty.nix
-    ./modules/bspwm.nix
-    ./modules/git.nix
-    ./modules/nvim.nix
-    ./modules/packages.nix
-    ./modules/sxhkd.nix
-    ./modules/zsh.nix
+    ./apps
+    ./cli
+    ./editors
+    ./fonts
+    ./wm
   ];
 
-  #
-  # Configs
-  #
-
-  home.keyboard.options = [ "caps:escape" ];
-
-  # Apps
-  programs.alacritty.enable = true;
-  programs.eza = {
-    enable = true;
-    enableZshIntegration = true;
-    icons = true;
-  };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -49,7 +35,6 @@
 
   home.sessionVariables = {
     EDITOR = "nvim";
-    WALLPAPER_PATH = "$HOME/.config/home-manager/wallpapers/gruvbox/brown_city.jpg";
   };
 
   # Let Home Manager install and manage itself.

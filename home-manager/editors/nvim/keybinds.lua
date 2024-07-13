@@ -24,3 +24,10 @@ km.set("n", "<leader>aa", "ggVG")
 -- Move up or down
 km.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
 km.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
+
+
+local builtin = require("telescope.builtin")
+vim.keymap.set("n", "<leader>ff", builtin.find_files)
+vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
+vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
