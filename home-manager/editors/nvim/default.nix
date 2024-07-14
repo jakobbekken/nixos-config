@@ -41,6 +41,16 @@
         config = toLuaFile ./plugins/telescope.lua;
       }
 
+      {
+        plugin = nvim-tree-lua;
+        config = toLuaFile ./plugins/nvim-tree.lua;
+      }
+
+      {
+        plugin = nvim-autopairs;
+        config = toLua "require('nvim-autopairs').setup()";
+      }
+
       # {
       #   plugin = ;
       #   config = ;

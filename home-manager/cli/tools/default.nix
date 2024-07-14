@@ -4,6 +4,7 @@
   imports = [
     ./eza.nix
     ./git.nix
+    ./ripgrep.nix
     ./zoxide.nix
   ];
 
@@ -12,6 +13,5 @@
     docker-compose
     fd
     fzf
-    ripgrep
   ];
 }
