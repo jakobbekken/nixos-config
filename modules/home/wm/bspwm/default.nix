@@ -5,6 +5,7 @@
     ./sxhkd.nix
     ./polybar.nix
     ../xorg
+    ../theming
   ];
 
   home.packages = with pkgs; [
@@ -28,7 +29,7 @@
     };
       extraConfig = ''
         set-monitors
-	      feh --bg-fill ${inputs.wallpapers.all.GiftOfOrzhova}
+        feh --bg-fill ${inputs.wallpapers.all.GiftOfOrzhova}
       '';
     };
   };

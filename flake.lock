@@ -102,11 +102,11 @@
     },
     "wallpapers": {
       "locked": {
-        "lastModified": 1743941064,
-        "narHash": "sha256-LB7RpRohmINfqf7sMR+sDNmSIik7vdSLwJ8Rf1HqwQE=",
+        "lastModified": 1743941589,
+        "narHash": "sha256-8kwSbM+EcWO/cbKxufb9OmWLZoWgJWvQzCTkqFa95PE=",
         "owner": "jakobbekken",
         "repo": "wallpapers",
-        "rev": "b69c94a02aa3a0a99fb6ea864e38d34e7731aa2c",
+        "rev": "25ae61177d9298b13dd6614020be6af6e75a5b1d",
         "type": "github"
       },
       "original": {

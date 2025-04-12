@@ -11,7 +11,7 @@
       #
 
       # Terminal emulator
-      "super + Return" = "alacritty";
+      "super + Return" = "ghostty";
 
       # Menu
       "super + d" = "dmenu_run";

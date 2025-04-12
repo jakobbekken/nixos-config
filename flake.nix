@@ -10,10 +10,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    wallpapers = {
-      url = "github:jakobbekken/wallpapers";
-    };
-
+    wallpapers.url = "github:jakobbekken/wallpapers";
+    
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -16,8 +16,10 @@
     ./editors/vscode
     ./system
     ./tools/alacritty
+    ./tools/ghostty
     ./tools/git
     ./tools/zsh
+    ./tools/fastfetch
     ./wm/bspwm
   ];
 
