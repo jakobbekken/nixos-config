@@ -3,7 +3,11 @@
 {
   home.packages = with pkgs; [
     audacity
+    prismlauncher
+    libreoffice-qt
+    zotero
     discord
+    vesktop
     gimp
     inkscape
     joplin
@@ -15,5 +19,6 @@
     thunderbird
     unstable.tidal-hifi
     vlc
+    eduvpn-client
   ];
 }

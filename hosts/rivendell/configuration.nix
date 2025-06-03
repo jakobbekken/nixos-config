@@ -54,6 +54,13 @@
     };
   };
 
+  services.displayManager = {
+    sessionPackages = [ pkgs.river pkgs.sway pkgs.niri ];
+    sddm.enable = true;
+  };
+
+  programs.xwayland.enable = true;
+
   # Graphics
   boot.initrd.kernelModules = [ "amdgpu" ];
   services.xserver.videoDrivers = [ "amdgpu" ];
@@ -72,7 +79,17 @@
       support32Bit = true;
     };
     pulse.enable = true;
-    # jack.enable = true; # For JACK applications
+    jack.enable = true; # For audio interface
+    wireplumber.enable = true;
+  };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-gnome  # Often needed for screen sharing
+    ];
+    config.common.default = "*";
   };
 
   # Bluetooth
@@ -107,6 +124,9 @@
     };
   };
 
+  # For Zsa Oryx
+  hardware.keyboard.zsa.enable = true;
+
   #
   # CUSTOM
   #
@@ -133,6 +153,10 @@
     helix
     dmenu
     alacritty
+    river
+    niri
+    xdg-desktop-portal
+    xdg-desktop-portal-gtk
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -149,10 +173,10 @@
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 3000 8000 1701 3131 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

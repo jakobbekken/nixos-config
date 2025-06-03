@@ -13,7 +13,7 @@
     package = pkgs.capitaine-cursors;
     gtk.enable = true;
     x11.enable = true;
-    size = 32;
+    size = 24;
   };
 
   gtk = {
@@ -25,13 +25,13 @@
     cursorTheme = {
       name = "capitaine-cursors";
       package = pkgs.capitaine-cursors;
-      size = 32;
+      size = 24;
     };
   };
 
   home.sessionVariables = {
     XCURSOR_THEME = "capitaine-cursors";
-    XCURSOR_SIZE = "32";
+    XCURSOR_SIZE = "24";
     GTK_THEME = "rose-pine";
   };
 }

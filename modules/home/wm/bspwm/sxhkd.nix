@@ -46,6 +46,8 @@
       # Alternate between tiled and monocle
       "super + m" = "bspc desktop -l next";
 
+      "super + f" = "bspc node -t fullscreen";
+
       # Focus/swap in given direction
       "super + {_,shift + }{h,j,k,l}" = "bspc node -{f,s} {west,south,north,east}";
       "super + {_,shift + }{left,down,up,right}" = "bspc node -{f,s} {west,south,north,east}";

@@ -7,7 +7,7 @@
       default = {
         id = 0;
         settings = {
-          "browser.startup.homepage" = "https://jokko.no";
+          "browser.startup.homepage" = "https://noext.jokko.no/home/";
         };
         search = {
           force = true;
@@ -53,13 +53,15 @@
 
         extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
           ublock-origin
-          vimium-c
+          vimium
+          remove-youtube-s-suggestions
+          zotero-connector
         ];
       };
     };
     policies = {
       Preferences = {
-        "extensions.ublock-origin.enabled" = true;
+        "extensions.webextensions.restrictedDomains" = "accounts-static.cdn.mozilla.net,accounts.firefox.com,addons.cdn.mozilla.net,addons.mozilla.org,api.accounts.firefox.com,content.cdn.mozilla.net,discovery.addons.mozilla.org,install.mozilla.org,oauth.accounts.firefox.com,profile.accounts.firefox.com,support.mozilla.org,sync.services.mozilla.com,noext.jokko.no";
         "extensions.autoDisableScopes" = 0;
         "signon.rememberSignon" = false;
         "browser.aboutConfig.showWarning" = false;

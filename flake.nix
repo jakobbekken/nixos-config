@@ -10,6 +10,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    niri-flake.url = "github:sodiboo/niri-flake";
+
     wallpapers.url = "github:jakobbekken/wallpapers";
     
     firefox-addons = {
@@ -18,11 +25,12 @@
     };
   };
 
-outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, ... }:
+outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, nix-index-database, niri-flake, ... }:
 let
   system = "x86_64-linux";
   unstable = import nixpkgs-unstable {
     inherit system;
+    config.allowUnfree = true;
   };
 in
 {
@@ -42,6 +50,11 @@ in
             inherit inputs;
             inherit unstable;
           };
+        }
+
+        nix-index-database.nixosModules.nix-index
+        {
+          programs.nix-index-database.comma.enable = true;
         }
       ];
     };
