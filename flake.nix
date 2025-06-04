@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs-latest.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     
     home-manager = {
@@ -25,7 +26,7 @@
     };
   };
 
-outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, nix-index-database, niri-flake, ... }:
+outputs = inputs@{ self, nixpkgs, nixpkgs-latest, nixpkgs-unstable, home-manager, nix-index-database, niri-flake, ... }:
 let
   system = "x86_64-linux";
   unstable = import nixpkgs-unstable {
@@ -33,30 +34,38 @@ let
     config.allowUnfree = true;
   };
 in
-{
-    nixosConfigurations.rivendell = nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = {
-        inherit unstable;
-      };
-      modules = [
-        ./hosts/rivendell/configuration.nix
-        home-manager.nixosModules.home-manager
-        {
-      	  home-manager.useGlobalPkgs = true;
-      	  home-manager.useUserPackages = true;
-      	  home-manager.users.jokko = import ./modules/home;
-          home-manager.extraSpecialArgs = {
-            inherit inputs;
-            inherit unstable;
-          };
-        }
+  {
+    nixosConfigurations = {
+      rivendell = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit unstable;
+        };
+        modules = [
+          ./hosts/rivendell/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+        	  home-manager.useGlobalPkgs = true;
+        	  home-manager.useUserPackages = true;
+        	  home-manager.users.jokko = import ./modules/home;
+            home-manager.extraSpecialArgs = {
+              inherit inputs;
+              inherit unstable;
+            };
+          }
 
-        nix-index-database.nixosModules.nix-index
-        {
-          programs.nix-index-database.comma.enable = true;
-        }
-      ];
+          nix-index-database.nixosModules.nix-index
+          {
+            programs.nix-index-database.comma.enable = true;
+          }
+        ];
+      };
+      barad-dur = nixpkgs-latest.lib.nixosSystem {
+        inherit system;
+        modules = [
+          ./hosts/barad-dur/configuration.nix
+        ];
+      };
     };
   };
 }
