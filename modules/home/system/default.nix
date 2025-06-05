@@ -13,8 +13,9 @@
     weylus
     xdotool
     yazi
+    unixtools.xxd
 
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    nerd-fonts.fira-code
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-emoji

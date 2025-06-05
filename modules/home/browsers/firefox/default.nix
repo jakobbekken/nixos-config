@@ -11,8 +11,8 @@
         };
         search = {
           force = true;
-          default = "DuckDuckGo";
-          order = [ "DuckDuckGo" "Nix Packages" "Home Manager" "Google" ];
+          default = "ddg";
+          order = [ "ddg" "Nix Packages" "Home Manager" "g" ];
           engines = {
             "Nix Packages" = {
               urls = [{
@@ -46,8 +46,8 @@
               icon = "https://search.nixos.org/favicon.png";
               definedAliases = [ "@hm" ];
             };
-            "Google".metaData.alias = "@g";
-            "DuckDuckGo".metaData.alias = "@d";
+            "g".metaData.alias = "@g";
+            "ddg".metaData.alias = "@d";
           };
         };
 

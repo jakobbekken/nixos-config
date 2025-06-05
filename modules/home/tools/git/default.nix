@@ -6,7 +6,7 @@
     userName = "Jakob Moen Bekken";
     userEmail = "jakobmb@uia.no";
     extraConfig = {
-      init.defaultBranch = "main";
+      init.defaultBranch = "master";
       safe.directory = "/etc/nixos";
     };
   };

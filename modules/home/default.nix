@@ -6,8 +6,6 @@
   home.keyboard.options = [ "caps:escape" ];
   home.keyboard.layout = "us";
 
-  nixpkgs.config.allowUnfree = true;
-
   imports = [
     ./apps
     ./browsers/firefox
@@ -39,6 +37,6 @@
     QT_QPA_PLATFORM = "wayland;xcb";
   };
 
-  home.stateVersion = "24.11";
+  home.stateVersion = "25.05";
   programs.home-manager.enable = true;
 }

@@ -11,7 +11,6 @@
     gimp
     inkscape
     joplin
-    kdenlive
     keepassxc
     obs-studio
     spotify
@@ -20,5 +19,6 @@
     unstable.tidal-hifi
     vlc
     eduvpn-client
+    vscode
   ];
 }

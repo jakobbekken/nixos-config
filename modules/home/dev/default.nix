@@ -5,5 +5,6 @@
     nixpkgs-fmt
     nil
     gnumake
+    bootdev-cli
   ];
 }
