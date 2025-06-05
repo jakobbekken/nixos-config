@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-    nixpkgs-latest.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     
     home-manager = {
@@ -26,7 +25,7 @@
     };
   };
 
-outputs = inputs@{ self, nixpkgs, nixpkgs-latest, nixpkgs-unstable, home-manager, nix-index-database, niri-flake, ... }:
+outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, nix-index-database, niri-flake, ... }:
 let
   system = "x86_64-linux";
   unstable = import nixpkgs-unstable {
@@ -60,10 +59,11 @@ in
           }
         ];
       };
-      barad-dur = nixpkgs-latest.lib.nixosSystem {
+      barad-dur = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
           ./hosts/barad-dur/configuration.nix
+          nix-index-database.nixosModules.nix-index
         ];
       };
     };
