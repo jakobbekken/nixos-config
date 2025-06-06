@@ -46,7 +46,7 @@ in
           {
         	  home-manager.useGlobalPkgs = true;
         	  home-manager.useUserPackages = true;
-        	  home-manager.users.jokko = import ./modules/home;
+        	  home-manager.users.jokko = import ./modules/home/jokko.nix;
             home-manager.extraSpecialArgs = {
               inherit inputs;
               inherit unstable;
@@ -63,6 +63,12 @@ in
         inherit system;
         modules = [
           ./hosts/barad-dur/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+        	  home-manager.useGlobalPkgs = true;
+        	  home-manager.useUserPackages = true;
+        	  home-manager.users.jokko = import ./modules/home/jokko.nix;
+          }
           nix-index-database.nixosModules.nix-index
         ];
       };

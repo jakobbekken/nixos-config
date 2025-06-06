@@ -23,10 +23,6 @@
   ];
 
   home.shellAliases = {
-    shx = "sudo -E hx";
-    nxconf = "cd /etc/nixos/";
-    nxhome = "cd /etc/nixos/modules/home/";
-    nxresw = "sudo nixos-rebuild switch";
     ":q" = "exit";
   };
 
