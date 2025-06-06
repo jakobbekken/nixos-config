@@ -67,7 +67,7 @@ in
           {
         	  home-manager.useGlobalPkgs = true;
         	  home-manager.useUserPackages = true;
-        	  home-manager.users.jokko = import ./modules/home/jokko.nix;
+        	  home-manager.users.sauron= import ./modules/home/sauron.nix;
           }
           nix-index-database.nixosModules.nix-index
         ];
