@@ -51,7 +51,7 @@
           };
         };
 
-        extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+        extensions.packages = with inputs.firefox-addons.packages.${pkgs.system}; [
           ublock-origin
           vimium
           remove-youtube-s-suggestions
