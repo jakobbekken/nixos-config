@@ -62,8 +62,13 @@
   programs.xwayland.enable = true;
 
   # Graphics
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.initrd.kernelModules = [ "amdgpu" "v4l2loopback" ];
+  boot.extraModulePackages = [ pkgs.linuxPackages.v4l2loopback ];
+  boot.extraModprobeConfig = ''
+    options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+  '';
   services.xserver.videoDrivers = [ "amdgpu" ];
+  hardware.enableRedistributableFirmware = true;
   hardware = {
     graphics.enable = true;
     amdgpu.amdvlk.enable = true;
@@ -157,6 +162,14 @@
     niri
     xdg-desktop-portal
     xdg-desktop-portal-gtk
+    v4l-utils
+    android-tools
+    adb-sync
+    vulkan-loader
+    vulkan-tools
+    mesa
+    radeontop
+    amdvlk
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

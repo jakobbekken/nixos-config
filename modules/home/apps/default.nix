@@ -12,7 +12,6 @@
     inkscape
     joplin
     keepassxc
-    obs-studio
     spotify
     steam
     thunderbird
@@ -20,5 +19,12 @@
     vlc
     eduvpn-client
     vscode
+    davinci-resolve
+    droidcam
   ];
+
+  programs.obs-studio = {
+    enable = true;
+    plugins = [ pkgs.obs-studio-plugins.droidcam-obs ];
+  };
 }

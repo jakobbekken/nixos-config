@@ -11,8 +11,14 @@
     ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.grub = {
+    enable = true;
+    device = "nodev";
+    efiSupport = true;
+    useOSProber = true;
+  };
   boot.loader.efi.canTouchEfiVariables = true;
+
 
   networking.hostName = "barad-dur"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -36,11 +42,65 @@
     variant = "";
   };
 
+    # Window manager
+  services.xserver = {
+    enable = true;
+    windowManager.bspwm = {
+      enable = true;
+      sxhkd.configFile = "${pkgs.bspwm}/share/doc/bspwm/examples/sxhkdrc";
+    };
+  };
+
+  services.displayManager = {
+    sddm.enable = true;
+  };
+
+  # Sound
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
+    pulse.enable = true;
+    jack.enable = true; # For audio interface
+    wireplumber.enable = true;
+  };
+
+  
+  # Bluetooth
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+
+    # Input
+  services.libinput = {
+    touchpad = {
+      naturalScrolling = true;
+      accelProfile = "flat";
+    };
+    mouse.accelProfile = "flat";
+  };
+
+  # USB-mounting
+  services.udisks2.enable = true;
+  security.polkit.enable = true;
+
+  # Docker
+  virtualisation.docker.enable = true;
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+  };
+
+  # For Zsa Oryx
+  hardware.keyboard.zsa.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sauron = {
     isNormalUser = true;
     description = "Sauron";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [];
   };
 
@@ -59,6 +119,7 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     git
     helix
+    dmenu
   #  wget
   ];
 

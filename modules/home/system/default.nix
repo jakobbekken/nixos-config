@@ -14,6 +14,7 @@
     xdotool
     yazi
     unixtools.xxd
+    reveal-md
 
     nerd-fonts.fira-code
     noto-fonts

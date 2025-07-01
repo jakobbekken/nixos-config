@@ -61,15 +61,25 @@ in
       };
       barad-dur = nixpkgs.lib.nixosSystem {
         inherit system;
+        specialArgs = {
+          inherit unstable;
+        };
         modules = [
           ./hosts/barad-dur/configuration.nix
           home-manager.nixosModules.home-manager
           {
         	  home-manager.useGlobalPkgs = true;
         	  home-manager.useUserPackages = true;
-        	  home-manager.users.sauron= import ./modules/home/sauron.nix;
+        	  home-manager.users.sauron = import ./modules/home/sauron.nix;
+            home-manager.extraSpecialArgs = {
+              inherit inputs;
+              inherit unstable;
+            };
           }
           nix-index-database.nixosModules.nix-index
+          {
+            programs.nix-index-database.comma.enable = true;
+          }
         ];
       };
     };

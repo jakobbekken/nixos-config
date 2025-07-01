@@ -97,21 +97,21 @@
         eDP-1 = {
           scale = 1;
           mode = {
-            width = 3840;
-            height = 2160;
+            width = 1920;
+            height = 1200;
             refresh = 60.000;
           };
           position = {
-            x = 640;
-            y = 2160;
+            x = -760;
+            y = 1440;
           };
         };
         HDMI-A-1 = {
-          scale = 1.5;
+          scale = 1.25;
           mode = {
-            width = 1920;
-            height = 1080;
-            refresh = 180.0;
+            width = 3440;
+            height = 1440;
+            refresh = 100.0;
           };
           position = {
             x = 0;
