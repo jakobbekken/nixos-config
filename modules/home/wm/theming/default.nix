@@ -6,6 +6,7 @@
     rose-pine-gtk-theme
     lxappearance
     dconf
+    arandr
   ];
 
   home.pointerCursor = {

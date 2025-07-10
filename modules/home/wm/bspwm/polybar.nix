@@ -6,7 +6,6 @@
     script = "";
     settings = {
       "bar/main" = {
-        monitor = "eDP";
         width = "100%";
         height = "32px";
 
@@ -26,31 +25,6 @@
 
         modules.left = "date";
         modules.center = "xworkspaces";
-        modules.right = "battery";
-      };
-
-      "bar/monitor" = {
-        monitor = "HDMI-A-0";
-        width = "100%";
-        height = "32px";
-
-        padding = 1;
-
-        
-        background = "#191724";
-        foreground = "#e0def4";
-
-        font = [
-          "FiraCode Nerd Font:pixelsize=14;2"
-        ];
-
-        acitve-font = 0;
-
-        wm.restack = "bspwm";
-
-        modules.left = "date";
-        modules.center = "xworkspaces";
-        modules.right = "battery";
       };
 
       "module/xworkspaces" = {
@@ -75,15 +49,6 @@
         date = "%H:%M";
         date-alt = "%d/%m/%y";
         label = "%date%";
-      };
-
-      "module/battery" = {
-        type = "internal/battery";
-        full.at = 99;
-        low.at = 10;
-        battery = "BAT0";
-        adapter = "AC";
-        poll-interval = 5;
       };
     };
   };

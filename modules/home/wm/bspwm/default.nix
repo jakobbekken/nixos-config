@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ inputs, ... }:
 
 {
   imports = [
@@ -6,10 +6,6 @@
     ./polybar.nix
     ../xorg
     ../theming
-  ];
-
-  home.packages = with pkgs; [
-    (writeShellScriptBin "set-monitors" (builtins.readFile ./set-monitors.sh))
   ];
 
   xsession = {
@@ -28,7 +24,6 @@
       focused_border_color = "#eb6f92";
     };
       extraConfig = ''
-        set-monitors
         feh --bg-fill ${inputs.wallpapers.all.GiftOfOrzhova}
       '';
     };

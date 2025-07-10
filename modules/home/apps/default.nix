@@ -21,6 +21,7 @@
     vscode
     davinci-resolve
     droidcam
+    itgmania
   ];
 
   programs.obs-studio = {

@@ -11,7 +11,7 @@
       #
 
       # Terminal emulator
-      "super + Return" = "ghostty";
+      "super + Return" = "alacritty";
 
       # Menu
       "super + d" = "dmenu_run";
@@ -46,7 +46,7 @@
       # Alternate between tiled and monocle
       "super + m" = "bspc desktop -l next";
 
-      "super + f" = "bspc node -t fullscreen";
+      "super + {t,shift + t,s,f}" = "bspc node -t {tiled, pseudo_tiled,floating,fullscreen}";
 
       # Focus/swap in given direction
       "super + {_,shift + }{h,j,k,l}" = "bspc node -{f,s} {west,south,north,east}";

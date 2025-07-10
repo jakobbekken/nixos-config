@@ -19,7 +19,6 @@
     ./tools/git
     ./tools/zsh
     ./wm/bspwm
-    ./wm/niri
   ];
 
   home.shellAliases = {
@@ -29,8 +28,6 @@
   home.sessionVariables = {
     EDITOR = "hx";
     SHELL = "zsh";
-    GDK_BACKEND = "wayland,x11";
-    QT_QPA_PLATFORM = "wayland;xcb";
   };
 
   home.stateVersion = "25.05";
