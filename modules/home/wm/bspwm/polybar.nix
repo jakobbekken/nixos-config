@@ -6,6 +6,7 @@
     script = "";
     settings = {
       "bar/main" = {
+        monitor = "";
         width = "100%";
         height = "32px";
 

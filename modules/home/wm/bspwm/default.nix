@@ -12,19 +12,23 @@
     enable = true;
     windowManager.bspwm = {
       enable = true;
+      monitors = {
+        DP-3 = [ "1" "2" "3" "4" "5" ];
+      };
       settings = {
-    	border_width = 4;
-    	window_gap = 16;
+      	border_width = 4;
+      	window_gap = 16;
 
-      split_ratio = 0.5;
-      borderless_monocle = true;
-      gapless_monocle = true;
+        split_ratio = 0.5;
+        borderless_monocle = true;
+        gapless_monocle = true;
 
-      normal_border_color = "#191724";
-      focused_border_color = "#eb6f92";
-    };
+        normal_border_color = "#191724";
+        focused_border_color = "#eb6f92";
+      };
       extraConfig = ''
         feh --bg-fill ${inputs.wallpapers.all.GiftOfOrzhova}
+        xrandr --output DP-3 --rate 180
       '';
     };
   };
