@@ -45,10 +45,6 @@
     # Window manager
   services.xserver = {
     enable = true;
-    windowManager.bspwm = {
-      enable = true;
-      sxhkd.configFile = "${pkgs.bspwm}/share/doc/bspwm/examples/sxhkdrc";
-    };
   };
 
   services.xserver.desktopManager.plasma6.enable = true;
