@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -55,11 +56,8 @@
   };
 
   services.displayManager = {
-    sessionPackages = [ pkgs.river pkgs.sway pkgs.niri ];
     sddm.enable = true;
   };
-
-  programs.xwayland.enable = true;
 
   # Graphics
   boot.initrd.kernelModules = [ "amdgpu" "v4l2loopback" ];
@@ -92,7 +90,7 @@
     enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
-      xdg-desktop-portal-gnome  # Often needed for screen sharing
+      xdg-desktop-portal-gnome # Often needed for screen sharing
     ];
     config.common.default = "*";
   };
@@ -141,7 +139,7 @@
     isNormalUser = true;
     description = "jokko";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
   };
 
   # Use flakes
