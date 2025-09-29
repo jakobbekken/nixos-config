@@ -3,6 +3,7 @@
 {
   home.username = "jokko";
   home.homeDirectory = "/home/jokko";
+  home.keyboard.variant = "altgr-intl";
   home.keyboard.options = [ "caps:escape" ];
   home.keyboard.layout = "us";
 
