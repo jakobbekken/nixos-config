@@ -4,7 +4,7 @@
   programs.alacritty = {
     enable = true;
     settings = {
-      font.size = 10;
+      font.size = 12;
       cursor.style.shape = "beam";
       terminal.shell = "zsh";
       window.padding = {
