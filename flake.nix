@@ -81,6 +81,11 @@
               home-manager.useUserPackages = true;
               home-manager.users.jokko = import ./home/darwin.nix;
             }
+
+            nix-index-database.darwinModules.nix-index
+            {
+              programs.nix-index-database.comma.enable = true;
+            }
           ];
         };
       };
