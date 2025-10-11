@@ -3,52 +3,19 @@
 {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages =
-  [ pkgs.vim
-    pkgs.neovim
-    pkgs.helix
-    pkgs.git
+  environment.systemPackages = with pkgs; [
+    colima
+    docker
+    docker-compose
+    git
+    helix
+    libfido2
+    neovim
+    openssh
+    vim
   ];
-
+  
   system.primaryUser = "jokko";
-
-
-  homebrew = {
-    enable = true;
-
-    onActivation = {
-      autoUpdate = true;
-      cleanup = "uninstall";
-      upgrade = true;
-    };
-
-    # brewPrefix = "/opt/homebrew/bin";
-    caskArgs = {
-      no_quarantine = true;
-    };
-
-    global = {
-      brewfile = true;
-    };
-
-    casks = [
-      "alacritty"
-      "discord"
-      "firefox"
-      "ghostty"
-      "microsoft-office"
-      "microsoft-teams"
-      "musescore"
-      "obsidian"
-      "prismlauncher"
-      "proton-drive"
-      "proton-mail"
-      "steam"
-      "thunderbird"
-      "tidal"
-      "visual-studio-code"
-    ];
-  };
 
   users.users.jokko.home = "/Users/jokko";
 
@@ -67,5 +34,5 @@
 
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
-}
+} 
 

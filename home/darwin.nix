@@ -10,6 +10,7 @@
     ./tools/alacritty
     ./tools/zsh
     ./tools/git
+    ./wm/aerospace
   ];
 
   home.shellAliases = {

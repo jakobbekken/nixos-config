@@ -74,7 +74,7 @@
             inherit self unstable;
           };
           modules = [
-            ./hosts/lorien/configuration.nix
+            ./hosts/lorien
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
