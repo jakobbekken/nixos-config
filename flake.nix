@@ -65,6 +65,15 @@
             }
           ];
         };
+        nixos = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit unstable;
+          };
+          modules = [
+            ./hosts/isengard/configuration.nix
+          ];
+        };
       };
 
       darwinConfigurations = {
