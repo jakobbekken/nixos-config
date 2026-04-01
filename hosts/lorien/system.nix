@@ -4,7 +4,6 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
-    colima
     docker
     docker-compose
     git
@@ -14,13 +13,24 @@
     openssh
     vim
   ];
-  
-  system.primaryUser = "jokko";
 
   users.users.jokko.home = "/Users/jokko";
 
+  security.pam.services.sudo_local.touchIdAuth = true;
+
+  system = {
+    primaryUser = "jokko";
+    startup.chime = false;
+    defaults = {
+      screencapture.location = "$HOME/Pictures/screenshots";
+      loginwindow.LoginwindowText = "If lost, call +47 41 32 59 51 or email post@jokko.no";
+    };
+  };
+
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
+
+  nixpkgs.config.allowUnfree = true;
 
   # Enable alternative shell support in nix-darwin.
   # programs.fish.enable = true;

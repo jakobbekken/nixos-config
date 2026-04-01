@@ -3,9 +3,9 @@
 {
   programs.git = {
     enable = true;
-    userName = "Jakob Moen Bekken";
-    userEmail = "jakobmb@uia.no";
-    extraConfig = {
+    settings = {
+      user.name = "Jakob Moen Bekken";
+      user.email = "jakobmb@uia.no";
       init.defaultBranch = "master";
     };
   };

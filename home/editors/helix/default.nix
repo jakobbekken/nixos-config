@@ -3,7 +3,7 @@
 {
   programs.helix = {
     enable = true;
-    ignores = [ 
+    ignores = [
       ".build/"
       "!.gitignore"
       "!.env"
@@ -31,6 +31,13 @@
           name = "nix";
           formatter.command = "nixpkgs-fmt";
           auto-format = true;
+        }
+        {
+          name = "go";
+          auto-format = true;
+          formatter = {
+            command = "goimports";
+          };
         }
       ];
     };

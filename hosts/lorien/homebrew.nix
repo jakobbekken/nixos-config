@@ -23,30 +23,44 @@
       "nikitabobko/tap"
     ];
 
+    brews = [
+      "colima"
+    ];
+
     casks = [
       "alacritty"
+      "android-studio"
+      "audacity"
       "canva"
+      "google-chrome"
       "discord"
       "elgato-stream-deck"
-      "figma"
       "firefox"
       "gimp"
+      "inkscape"
+      "intellij-idea"
       "keepassxc"
       "linearmouse"
       "microsoft-office"
       "microsoft-teams"
       "middleclick"
       "musescore"
+      "musicbrainz-picard"
       "nikitabobko/tap/aerospace"
       "obs"
       "obsidian"
       "prismlauncher"
       "proton-drive"
       "proton-mail"
+      "protonvpn"
       "spotify"
       "steam"
       "tidal"
       "visual-studio-code"
+      "vivaldi"
+      "vlc"
+      "xld"
+      "xquartz"
       "zotero"
     ];
   };

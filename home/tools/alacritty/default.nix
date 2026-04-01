@@ -7,6 +7,7 @@
       font.size = 12;
       cursor.style.shape = "beam";
       terminal.shell = "zsh";
+      window.option_as_alt = "OnlyLeft";
       window.padding = {
         x = 4;
         y = 4;
