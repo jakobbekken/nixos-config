@@ -7,6 +7,5 @@
     zip
     xdotool
     yazi
-    unixtools.xxd
   ];
 }

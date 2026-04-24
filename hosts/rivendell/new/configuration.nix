@@ -6,21 +6,15 @@
 
 {
   imports =
-    [
-      # Include the results of the hardware scan.
+    [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
   # Bootloader.
-  boot.loader.grub = {
-    enable = true;
-    device = "nodev";
-    efiSupport = true;
-    useOSProber = true;
-  };
+  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "rivendell"; # Define your hostname.
+  networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -38,28 +32,10 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  programs.xwayland.enable = true;
 
-  services.displayManager = {
-    sessionPackages = [ pkgs.niri ];
-    sddm.enable = true;
-  };
-
-  environment.pathsToLink = [
-    "/share/applications"
-    "/share/xdg-desktop-portal"
-  ];
-
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-
-  # USB mounting
-
-  services.udisks2.enable = true;
-  security.polkit.enable = true;
-
-  hardware.uinput.enable = true;
-  services.udev.packages = [ pkgs.game-devices-udev-rules ];
+  # Enable the GNOME Desktop Environment.
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -86,25 +62,6 @@
     #media-session.enable = true;
   };
 
-  # GRAPHICS
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
-
-  services.xserver.videoDrivers = [ "nvidia" ];
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    open = false;
-
-    # Nvidia settings menu
-    nvidiaSettings = true;
-
-    # Optionally, specify driver version
-    # package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -112,30 +69,26 @@
   users.users.jokko = {
     isNormalUser = true;
     description = "Jakob";
-    extraGroups = [ "networkmanager" "wheel" "input" ];
+    extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      #  thunderbird
+    #  thunderbird
     ];
   };
+
+  # Install firefox.
+  programs.firefox.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # Use flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  programs.nix-ld.enable = true;
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #  wget
-    niri
-    xwayland-satellite
-    helix
-    git
-    keepassxc
+  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  helix
+  git
+  keepassxc
+  #  wget
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

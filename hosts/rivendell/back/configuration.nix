@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports =
@@ -36,106 +36,138 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  programs.xwayland.enable = true;
-
-  services.displayManager = {
-    sessionPackages = [ pkgs.niri ];
-    sddm.enable = true;
-  };
-
-  environment.pathsToLink = [
-    "/share/applications"
-    "/share/xdg-desktop-portal"
-  ];
-
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-
-  # USB mounting
-
-  services.udisks2.enable = true;
-  security.polkit.enable = true;
-
-  hardware.uinput.enable = true;
-  services.udev.packages = [ pkgs.game-devices-udev-rules ];
-
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     variant = "";
   };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
+  #
+  # CUSTOM
+  #
 
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
+  # Window manager
+  services.xserver = {
+    enable = true;
+    windowManager.bspwm = {
+      enable = true;
+      sxhkd.configFile = "${pkgs.bspwm}/share/doc/bspwm/examples/sxhkdrc";
+    };
+  };
+
+  services.displayManager = {
+    sddm.enable = true;
+  };
+
+  # Graphics
+  boot.initrd.kernelModules = [ "amdgpu" "v4l2loopback" ];
+  boot.extraModulePackages = [ pkgs.linuxPackages.v4l2loopback ];
+  boot.extraModprobeConfig = ''
+    options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+  '';
+  services.xserver.videoDrivers = [ "amdgpu" ];
+  hardware.enableRedistributableFirmware = true;
+  hardware = {
+    graphics.enable = true;
+    amdgpu.amdvlk.enable = true;
+    graphics.enable32Bit = true;
+  };
+
+  # Sound
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
+    jack.enable = true; # For audio interface
+    wireplumber.enable = true;
   };
 
-  # GRAPHICS
-  hardware.graphics = {
+  xdg.portal = {
     enable = true;
-    enable32Bit = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-gnome # Often needed for screen sharing
+    ];
+    config.common.default = "*";
   };
 
-  services.xserver.videoDrivers = [ "nvidia" ];
+  # Bluetooth
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
 
-  hardware.nvidia = {
-    modesetting.enable = true;
-    open = false;
-
-    # Nvidia settings menu
-    nvidiaSettings = true;
-
-    # Optionally, specify driver version
-    # package = config.boot.kernelPackages.nvidiaPackages.stable;
+  # Input
+  services.libinput = {
+    touchpad = {
+      naturalScrolling = true;
+      accelProfile = "flat";
+    };
+    mouse.accelProfile = "flat";
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  # USB-mounting
+  services.udisks2.enable = true;
+  security.polkit.enable = true;
+
+  # Docker
+  virtualisation.docker.enable = true;
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+  };
+
+  # Power
+  services.tlp = {
+    enable = true;
+    settings = {
+      STOP_CHARGE_THRESH_BAT0 = 80;
+    };
+  };
+
+  # For Zsa Oryx
+  hardware.keyboard.zsa.enable = true;
+
+  #
+  # CUSTOM
+  #
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jokko = {
     isNormalUser = true;
-    description = "Jakob";
-    extraGroups = [ "networkmanager" "wheel" "input" ];
-    packages = with pkgs; [
-      #  thunderbird
-    ];
+    description = "jokko";
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    packages = with pkgs; [ ];
   };
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   # Use flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  programs.nix-ld.enable = true;
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #  wget
-    niri
-    xwayland-satellite
-    helix
     git
-    keepassxc
+    wget
+    helix
+    dmenu
+    alacritty
+    river
+    niri
+    xdg-desktop-portal
+    xdg-desktop-portal-gtk
+    v4l-utils
+    android-tools
+    adb-sync
+    vulkan-loader
+    vulkan-tools
+    mesa
+    radeontop
+    amdvlk
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -152,10 +184,10 @@
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 3000 8000 1701 3131 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -163,6 +195,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.11"; # Did you read the comment?
+  system.stateVersion = "25.05"; # Did you read the comment?
 
 }

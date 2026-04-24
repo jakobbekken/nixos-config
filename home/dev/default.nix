@@ -6,5 +6,7 @@
     nil
     gnumake
     bootdev-cli
+    jdk25_headless
+    claude-code
   ];
 }

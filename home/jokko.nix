@@ -17,7 +17,7 @@
     ./tools/alacritty
     ./tools/git
     ./tools/zsh
-    ./wm/bspwm
+    ./wm/niri
   ];
 
   home.shellAliases = {

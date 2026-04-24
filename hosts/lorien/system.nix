@@ -12,6 +12,7 @@
     neovim
     openssh
     vim
+    exfatprogs
   ];
 
   users.users.jokko.home = "/Users/jokko";

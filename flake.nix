@@ -11,7 +11,6 @@
     };
 
 
-    nix-homebrew = { url = "github:zhaofengli/nix-homebrew"; };
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -30,13 +29,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
+    niri-flake = {
+      url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-homebrew = { url = "github:zhaofengli/nix-homebrew"; };
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, nix-darwin, nix-homebrew, home-manager, nix-index-database, sops-nix, ... }:
+  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, nix-darwin, nix-homebrew, home-manager, nix-index-database, niri-flake, ... }:
     let
       system = "x86_64-linux";
       unstable = import nixpkgs-unstable {
@@ -76,18 +77,17 @@
         lorien = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = {
-            inherit self unstable inputs sops-nix;
+            inherit self unstable inputs;
           };
           modules = [
             ./hosts/lorien
-            sops-nix.darwinModules.sops
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.jokko = import ./home/darwin.nix;
               home-manager.sharedModules = [
-                sops-nix.homeManagerModules.sops
+                # sops-nix.homeManagerModules.sops
               ];
             }
 

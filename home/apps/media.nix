@@ -1,15 +1,17 @@
-{ pkgs, unstable, ... }:
+{ unstable, pkgs, ... }:
 
 {
   home.packages = with pkgs; [
     audacity
+    easyeffects
     gimp
     inkscape
     vlc
     droidcam
     davinci-resolve
     spotify
-    unstable.tidal-hifi
+    unstable.feishin
+    unstable.dolphin-emu
   ];
 
   programs.obs-studio = {

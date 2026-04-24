@@ -4,9 +4,7 @@
   home.packages = with pkgs; [
     capitaine-cursors
     rose-pine-gtk-theme
-    lxappearance
     dconf
-    arandr
   ];
 
   home.pointerCursor = {
