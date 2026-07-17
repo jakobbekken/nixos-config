@@ -1,6 +1,13 @@
 { ... }:
 
 {
+  xdg.configFile."helix/themes/rose_pine_transparent.toml".text = ''
+    inherits = "rose_pine"
+
+    "ui.background" = {}
+    "ui.cursorline.primary" = { bg = "#26233a" }
+  '';
+
   programs.helix = {
     enable = true;
     ignores = [
@@ -9,7 +16,7 @@
       "!.env"
     ];
     settings = {
-      theme = "rose_pine";
+      theme = "rose_pine_transparent";
       editor = {
         line-number = "relative";
         lsp.display-messages = true;

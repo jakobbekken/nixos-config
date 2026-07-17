@@ -6,39 +6,29 @@
 
     onActivation = {
       autoUpdate = true;
-      cleanup = "uninstall";
+      cleanup = "none";
       upgrade = true;
     };
 
     # brewPrefix = "/opt/homebrew/bin";
-    caskArgs = {
-      no_quarantine = true;
-    };
+    # caskArgs = {
+    #   no_quarantine = true;
+    # };
 
     global = {
-      brewfile = true;
+      brewfile = false;
     };
 
     taps = [
       "nikitabobko/tap"
     ];
 
-    brews = [
-      "colima"
-    ];
-
     casks = [
-      "alacritty"
       "android-studio"
       "audacity"
-      "canva"
-      "google-chrome"
       "discord"
-      "elgato-stream-deck"
       "firefox"
-      "gimp"
-      "inkscape"
-      "intellij-idea"
+      "ghostty"
       "keepassxc"
       "linearmouse"
       "microsoft-office"
@@ -52,15 +42,11 @@
       "prismlauncher"
       "proton-drive"
       "proton-mail"
-      "protonvpn"
       "spotify"
       "steam"
-      "tidal"
       "visual-studio-code"
-      "vivaldi"
       "vlc"
       "xld"
-      "xquartz"
       "zotero"
     ];
   };
