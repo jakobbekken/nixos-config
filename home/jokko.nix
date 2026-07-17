@@ -10,14 +10,11 @@
   imports = [
     ./apps
     ./browsers/firefox
-    ./browsers/thunar
     ./dev
     ./editors/helix
-    ./system
     ./tools/alacritty
     ./tools/git
     ./tools/zsh
-    ./wm/bspwm
   ];
 
   home.shellAliases = {
@@ -29,6 +26,6 @@
     SHELL = "zsh";
   };
 
-  home.stateVersion = "25.05";
+  home.stateVersion = "26.05";
   programs.home-manager.enable = true;
 }

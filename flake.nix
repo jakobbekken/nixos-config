@@ -65,6 +65,30 @@
             }
           ];
         };
+        helms-deep = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit unstable;
+          };
+          modules = [
+            ./hosts/helms-deep/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.jokko = import ./home/jokko.nix;
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
+                inherit unstable;
+              };
+            }
+
+            nix-index-database.nixosModules.nix-index
+            {
+              programs.nix-index-database.comma.enable = true;
+            }
+          ];
+        };
       };
 
       darwinConfigurations = {
